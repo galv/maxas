@@ -1287,6 +1287,7 @@ sub processAsmLine
 sub processSassLine
 {
     my $line = shift;
+    my $ctrl_index = shift;
 
     if ($line =~ m"^\s+/\*(?<num>[0-9a-f]+)\*/\s+$InstRe\s+/\* (?<code>0x[0-9a-f]+)"o)
     {
@@ -1297,6 +1298,7 @@ sub processSassLine
             ins     => normalizeSpacing($+{op} . $+{rest}),
             inst    => normalizeSpacing($+{pred} . $+{op} . $+{rest}),
             code    => hex($+{code}),
+            ctrl_index => $ctrl_index,
         };
     }
     return undef;
